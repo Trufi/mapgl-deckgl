@@ -1,8 +1,8 @@
 /// <reference path="../node_modules/@2gis/mapgl/global.d.ts" />
 import * as dat from 'dat.gui';
 import { Deck } from '@deck.gl/core';
-import { airport } from './cases/airport';
-import { heatmap } from './cases/heatmap';
+import { airport } from './examples/airport';
+import { heatmap } from './examples/heatmap';
 
 const gui = new dat.GUI();
 
@@ -34,13 +34,6 @@ const map = ((window as any).map = new mapgl.Map('map', {
 
 window.addEventListener('resize', () => map.invalidateSize());
 
-gui.add({ 'Map style': 'b2b8046f-9bb0-469a-9860-9847032935cc' }, 'Map style', {
-    Day: 'c080bb6a-8134-4993-93a1-5b4d8c36a59b',
-    Night: 'e05ac437-fcc2-4845-ad74-b1de9ce07555',
-    Grayscale: 'b2b8046f-9bb0-469a-9860-9847032935cc',
-    Snow: '1db52c6e-66b6-4c99-9c83-5538fa962d43',
-}).onChange((styleId) => map.setStyleById(styleId));
-
 const deck = ((window as any).deck = new Deck({
     canvas: 'deck-canvas',
     width: '100%',
@@ -60,21 +53,26 @@ function onViewStateChange({ viewState }) {
 
 deck.setProps({ layers: airport.layers() });
 
-const cases = {
+const examples = {
     airport,
     heatmap,
 };
 
 gui.add(
     {
-        cases: 'airport',
+        Examples: 'airport',
     },
-    'cases',
-    Object.keys(cases),
-).onChange((caseName) => {
-    const suite = cases[caseName];
-
-    console.log(suite);
-    deck.setProps({ layers: suite.layers(), initialViewState: suite.position });
+    'Examples',
+    Object.keys(examples),
+).onChange((exampleName) => {
+    const example = examples[exampleName];
+    deck.setProps({ layers: example.layers(), initialViewState: example.position });
     onViewStateChange({ viewState: deck.viewState });
 });
+
+gui.add({ 'Map style': 'b2b8046f-9bb0-469a-9860-9847032935cc' }, 'Map style', {
+    Day: 'c080bb6a-8134-4993-93a1-5b4d8c36a59b',
+    Night: 'e05ac437-fcc2-4845-ad74-b1de9ce07555',
+    Grayscale: 'b2b8046f-9bb0-469a-9860-9847032935cc',
+    Snow: '1db52c6e-66b6-4c99-9c83-5538fa962d43',
+}).onChange((styleId) => map.setStyleById(styleId));
