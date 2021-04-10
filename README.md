@@ -12,4 +12,4 @@ An integration example 2GIS MapGL API with deck.gl
 Deck web mercator:
 
 -   [math](https://github.com/uber-web/math.gl/blob/master/modules/web-mercator/src/web-mercator-utils.js)
--   [viewport](https://github.com/visgl/deck.gl/blob/8.4-release/modules/core/src/viewports/web-mercator-viewport.js)]
+-   [viewport](https://github.com/visgl/deck.gl/blob/8.4-release/modules/core/src/viewports/web-mercator-viewport.js)
