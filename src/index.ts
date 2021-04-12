@@ -49,6 +49,10 @@ function onViewStateChange({ viewState }) {
     map.setZoom(viewState.zoom + 1, { animate: false });
     map.setRotation(-viewState.bearing, { animate: false });
     map.setPitch(viewState.pitch, { animate: false });
+
+    // hack to fix a frame freezing
+    // should be fixed in MapGL API in the future
+    (map as any)._impl.state.needRerender = true;
 }
 
 deck.setProps({ layers: airport.layers() });
