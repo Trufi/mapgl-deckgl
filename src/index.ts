@@ -70,7 +70,10 @@ gui.add(
     Object.keys(examples),
 ).onChange((exampleName) => {
     const example = examples[exampleName];
-    deck.setProps({ layers: example.layers(), initialViewState: example.position });
+    deck.setProps({
+        layers: example.layers(),
+        initialViewState: { ...initialViewState, ...example.position },
+    });
     onViewStateChange({ viewState: deck.viewState });
 });
 
