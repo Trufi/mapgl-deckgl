@@ -52,7 +52,9 @@ function onViewStateChange({ viewState }) {
 
     // hack to fix a frame freezing
     // should be fixed in MapGL API in the future
-    (map as any)._impl.state.needRerender = true;
+    try {
+        (map as any)._impl.state.needRerender = true;
+    } catch (err) {}
 }
 
 deck.setProps({ layers: airport.layers() });
