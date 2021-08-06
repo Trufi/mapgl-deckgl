@@ -2,7 +2,7 @@
 
 An integration example 2GIS MapGL API with deck.gl
 
-[Demo](https://trufi.github.io/mapgl-deckgl/)
+[Demo](https://trufi.github.io/mapgl-deckgl-example/)
 
 ## References
 
